@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useState } from 'react';
 import './invokerapp.css';
 import Element from './Element';
@@ -40,25 +40,31 @@ function InvokerApp() {
 
   //4 estado pa guardar el intervalo de setInterval
   const [inter, setInter] = useState(null);
+  const interRef = useRef();
+  interRef.current = inter;
+
+  console.log('inicio inter: ', inter);
+  console.log('inicio interref.current', interRef.current);
+  console.log('inicio interref', interRef);
 
   //4.1 guardar timeout pa limpiarlo desp
   const [deleteTimeout, setDeleteTimeout] = useState(null);
+  const deleteTimeoutRef = useRef();
+  deleteTimeoutRef.current = deleteTimeout;
 
   //5 el poder que hay que lanzar
   const [reto, setReto] = useState(null);
 
   //6 puntuacion que lleva  jugando...
   const [score, setScore] = useState(0);
+  const scoreRef = useRef();
+  scoreRef.current = score;
 
   //7 global score
   const [globalScore, setGlobalScore] = useState(bestScore);
 
   //8 esta jugando??
   const [jugando, setJugando] = useState(false);
-
-  //9 pa useeffect
-  const [detenerbool, setDetenerbool] = useState(false);
-  console.log(detenerbool);
 
   //funcion que se ejecuta cuando se presiona una tecla
   const keydown = (e) => {
@@ -174,35 +180,31 @@ function InvokerApp() {
 
     //no ve los estados hay q limpiar el settime out
     const timeout = setTimeout(() => {
-      console.log('settimeouttttt');
-      detenerbool ? setDetenerbool(false) : setDetenerbool(true);
-    }, 60000);
+      Stop();
+    }, 5000);
     setDeleteTimeout(timeout);
   };
 
-  useEffect(() => {
-    console.log(' use effect cambio detener bool');
+  const Stop = () => {
     let bestSco = parseInt(globalScore);
-
-    if (score > bestSco) {
-      localStorage.setItem('bestRecord', JSON.stringify(score));
-      setGlobalScore(score);
+    console.log('en el stop ', scoreRef.current);
+    if (scoreRef.current > bestSco) {
+      localStorage.setItem('bestRecord', JSON.stringify(scoreRef.current));
+      setGlobalScore(scoreRef.current);
     }
-
+    console.log(scoreRef.current);
     setElements(initElements);
     setSpells(initSpells);
-    clearInterval(inter);
+    clearInterval(interRef.current);
+    //clearInterval(inter);
     setInter(null);
-    clearTimeout(deleteTimeout);
+    clearTimeout(deleteTimeoutRef.current);
     setDeleteTimeout(null);
+    deleteTimeoutRef.current = null;
+
     setTimer1(60);
     setJugando(false);
     setReto(null);
-  }, [detenerbool]);
-
-  const Stop = () => {
-    console.log('entro al stoppppppp');
-    detenerbool ? setDetenerbool(false) : setDetenerbool(true);
   };
 
   useEffect(() => {
