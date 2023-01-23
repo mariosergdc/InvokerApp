@@ -181,7 +181,7 @@ function InvokerApp() {
     //no ve los estados hay q limpiar el settime out
     const timeout = setTimeout(() => {
       Stop();
-    }, 5000);
+    }, 60000);
     setDeleteTimeout(timeout);
   };
 
