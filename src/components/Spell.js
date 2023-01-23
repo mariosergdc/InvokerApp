@@ -1,3 +1,6 @@
+/***App made by Mario Sergio Domínguez Consuegra***/
+/***mariosergdc.webdev@gmail.com***/
+
 import React from 'react';
 function Spell({ type, char }) {
   return (

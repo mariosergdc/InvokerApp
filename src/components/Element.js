@@ -1,3 +1,6 @@
+/***App made by Mario Sergio Domínguez Consuegra***/
+/***mariosergdc.webdev@gmail.com***/
+
 function Element({ data }) {
   //data es caracter q w e
   if (data === 'q')
@@ -15,7 +18,7 @@ function Element({ data }) {
   else if (data === 'e')
     return (
       <div className="element">
-        <img src="/photos/exort2.png" alt="" />
+        <img src="/photos/exort.png" alt="" />
       </div>
     );
 }

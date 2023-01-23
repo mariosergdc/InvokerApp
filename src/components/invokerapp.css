@@ -1,3 +1,6 @@
+/***App made by Mario Sergio Domínguez Consuegra***/
+/***mariosergdc.webdev@gmail.com***/
+
 .app {
   display: flex;
   justify-content: center;
@@ -100,7 +103,7 @@ button {
   height: 35px;
 }
 
-.record {
+.score {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -186,5 +189,3 @@ button {
   font-size: 8px;
   padding: 1px;
 }
-/*////////////////////////////////////*/
-/*palabras por traducir record*/

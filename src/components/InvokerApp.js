@@ -1,10 +1,12 @@
+/***App made by Mario Sergio Domínguez Consuegra***/
+/***mariosergdc.webdev@gmail.com***/
+
 import { useEffect, useRef } from 'react';
 import { useState } from 'react';
 import './invokerapp.css';
 import Element from './Element';
 import Spell from './Spell';
 
-//const initTimer = 60;
 //elementos quas wex exort
 const initElements = ['', '', ''];
 
@@ -26,7 +28,7 @@ const spellTypes = [
 ];
 
 //lee bestScore del local storage
-let bestScore = JSON.parse(localStorage.getItem('bestRecord')) || 0;
+let bestScore = JSON.parse(localStorage.getItem('bestScore')) || 0;
 
 function InvokerApp() {
   //1 elementos quas wex exort
@@ -35,36 +37,32 @@ function InvokerApp() {
   //2 echizos listos pa lanzar string con el nombre completo del echizo
   const [spells, setSpells] = useState(initSpells);
 
-  //3 estado pa llevar el tiempo de juego transcurrido
-  const [timer1, setTimer1] = useState(60);
+  //3 estado para llevar el tiempo de juego transcurrido
+  const [timer, setTimer] = useState(60);
 
-  //4 estado pa guardar el intervalo de setInterval
+  //4 estado para guardar el intervalo de setInterval
   const [inter, setInter] = useState(null);
   const interRef = useRef();
   interRef.current = inter;
 
-  console.log('inicio inter: ', inter);
-  console.log('inicio interref.current', interRef.current);
-  console.log('inicio interref', interRef);
-
-  //4.1 guardar timeout pa limpiarlo desp
+  //5 estado para guardar timeout para limpiarlo despues
   const [deleteTimeout, setDeleteTimeout] = useState(null);
   const deleteTimeoutRef = useRef();
   deleteTimeoutRef.current = deleteTimeout;
 
-  //5 el poder que hay que lanzar
-  const [reto, setReto] = useState(null);
+  //6 el poder que hay que lanzar
+  const [challenge, setChallenge] = useState(null);
 
-  //6 puntuacion que lleva  jugando...
+  //7 puntuacion que lleva  jugando...
   const [score, setScore] = useState(0);
   const scoreRef = useRef();
   scoreRef.current = score;
 
-  //7 global score
+  //8 global score, puntuacion maxima alcanzada en juegos anteriores
   const [globalScore, setGlobalScore] = useState(bestScore);
 
-  //8 esta jugando??
-  const [jugando, setJugando] = useState(false);
+  //9 esta jugando??
+  const [playing, setPlaying] = useState(false);
 
   //funcion que se ejecuta cuando se presiona una tecla
   const keydown = (e) => {
@@ -83,7 +81,7 @@ function InvokerApp() {
       elements[1] !== '' &&
       elements[2] !== ''
     ) {
-      //crea arreglo nuevo que para actualizar echizos
+      //crea arreglo nuevo que para actualizar hechizos
       let newSpell = new Array(2);
       newSpell[1] = spells[0];
       let value =
@@ -131,54 +129,50 @@ function InvokerApp() {
     }
     //si tecla d lanzar echizo
     else if (e.key === 'd') {
-      if (spellTypes[reto] === spells[0]) {
-        if (jugando) {
+      if (spellTypes[challenge] === spells[0]) {
+        if (playing) {
           setScore(score + 1);
         }
-        const number = Math.round(Math.random() * 9);
-        setReto(number);
+        let number = Math.round(Math.random() * 9);
+        while (number === challenge) {
+          number = Math.round(Math.random() * 9);
+        }
+        setChallenge(number);
       }
     } else if (e.key === 'f') {
-      if (spellTypes[reto] === spells[1]) {
-        if (jugando) {
+      if (spellTypes[challenge] === spells[1]) {
+        if (playing) {
           setScore(score + 1);
         }
 
-        const number = Math.round(Math.random() * 9);
-        setReto(number);
+        let number = Math.round(Math.random() * 9);
+        while (number === challenge) {
+          number = Math.round(Math.random() * 9);
+        }
+        setChallenge(number);
       }
     }
     //tecla enter lo mismo q boton start
     else if (e.key === 'Enter') {
       e.preventDefault();
-      if (!jugando) Start();
+      if (!playing) Start();
     }
-    /* console.log(e.key);
-    console.log(e.key.charCodeAt(0)); */
   };
 
   const Start = () => {
     const number = Math.round(Math.random() * 9);
     // inicia el echizo q hay q lanzar numero
-    setReto(number);
+    setChallenge(number);
     //variable jugando true iniciar juego
-    setJugando(true);
-    //record actual jugando 0
+    setPlaying(true);
+    //puntuacion actual jugando 0
     setScore(0);
 
-    /* const intervalo = setInterval(() => {
-      console.log("setinterval");
-      let tiempo = timer1 - 1;
-      setTimer1(tiempo);
-    }, 1000);
-    setInter(intervalo); */
-
     const intervalo = setInterval(() => {
-      setTimer1((prevState) => prevState - 1);
+      setTimer((prevState) => prevState - 1);
     }, 1000);
     setInter(intervalo);
 
-    //no ve los estados hay q limpiar el settime out
     const timeout = setTimeout(() => {
       Stop();
     }, 60000);
@@ -187,24 +181,22 @@ function InvokerApp() {
 
   const Stop = () => {
     let bestSco = parseInt(globalScore);
-    console.log('en el stop ', scoreRef.current);
+    //si la puntuacion actual es mejor que las anteriores actualizar mejor puntuacion
     if (scoreRef.current > bestSco) {
-      localStorage.setItem('bestRecord', JSON.stringify(scoreRef.current));
+      localStorage.setItem('bestScore', JSON.stringify(scoreRef.current));
       setGlobalScore(scoreRef.current);
     }
-    console.log(scoreRef.current);
     setElements(initElements);
     setSpells(initSpells);
     clearInterval(interRef.current);
-    //clearInterval(inter);
     setInter(null);
+    interRef.current = null;
     clearTimeout(deleteTimeoutRef.current);
     setDeleteTimeout(null);
     deleteTimeoutRef.current = null;
-
-    setTimer1(60);
-    setJugando(false);
-    setReto(null);
+    setTimer(60);
+    setPlaying(false);
+    setChallenge(null);
   };
 
   useEffect(() => {
@@ -220,9 +212,8 @@ function InvokerApp() {
           <div>Best Score: {globalScore}</div>
         </div>
         <div className="switch-container container">
-          {/* <div className="switch fe"> */}
-          <div className={jugando ? 'switch fe' : 'switch'}>
-            {jugando ? (
+          <div className={playing ? 'switch fe' : 'switch'}>
+            {playing ? (
               <>
                 <button className="btn-stop" onClick={Stop}>
                   Stop
@@ -241,25 +232,27 @@ function InvokerApp() {
           className="container timer"
           style={{
             color:
-              (timer1 < 31 && timer1 > 15 && 'yellow') ||
-              (timer1 < 16 && 'red'),
+              (timer < 31 && timer > 15 && 'yellow') || (timer < 16 && 'red'),
           }}
         >
-          {timer1}
+          {timer}
         </div>
 
         <div className="container challenge-container">
           <div className="label container">
-            {reto !== null && <h4>Cast this spell</h4>}
+            {challenge !== null && <h4>Cast this spell</h4>}
           </div>
 
           <div className="challenge-spell">
-            {reto !== null && (
-              <img src={`/photos/spells/${spellTypes[reto]}.png`} alt="spell" />
+            {challenge !== null && (
+              <img
+                src={`/photos/spells/${spellTypes[challenge]}.png`}
+                alt="spell"
+              />
             )}
           </div>
         </div>
-        <div className="record">{score}</div>
+        <div className="score">{score}</div>
 
         <div className="elements">
           <Element data={elements[0]} />
