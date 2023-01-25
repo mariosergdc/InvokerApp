@@ -20,7 +20,7 @@ const spellTypes = [
   'icewall',
   'emp',
   'tornado',
-  'aclarity',
+  'alacrity',
   'desarme',
   'sunstrike',
   'bichos',
