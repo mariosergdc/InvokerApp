@@ -1,5 +1,6 @@
 /***App made by Mario Sergio Domínguez Consuegra***/
 /***mariosergdc.webdev@gmail.com***/
+/***linkedin.com/in/mario-domínguez-consuegra-460609248***/
 
 function Element({ data }) {
   //data es caracter q w e

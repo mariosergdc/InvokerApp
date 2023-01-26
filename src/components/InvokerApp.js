@@ -1,5 +1,6 @@
 /***App made by Mario Sergio Domínguez Consuegra***/
 /***mariosergdc.webdev@gmail.com***/
+/***linkedin.com/in/mario-domínguez-consuegra-460609248***/
 
 import { useEffect, useRef } from 'react';
 import { useState } from 'react';
