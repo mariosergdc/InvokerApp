@@ -7,19 +7,19 @@ function Element({ data }) {
   if (data === 'q')
     return (
       <div className="element">
-        <img src="/photos/quas.png" alt="" />
+        <img src="photos/quas.png" alt="" />
       </div>
     );
   else if (data === 'w')
     return (
       <div className="element">
-        <img src="/photos/wex.png" alt="" />
+        <img src="photos/wex.png" alt="" />
       </div>
     );
   else if (data === 'e')
     return (
       <div className="element">
-        <img src="/photos/exort.png" alt="" />
+        <img src="photos/exort.png" alt="" />
       </div>
     );
 }

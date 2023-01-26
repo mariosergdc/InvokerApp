@@ -6,7 +6,7 @@ import React from 'react';
 function Spell({ type, char }) {
   return (
     <div className="spell">
-      {type && <img src={`/photos/spells/${type}.png`} alt="" />}
+      {type && <img src={`photos/spells/${type}.png`} alt="" />}
       <div className={char === 'D' ? 'char-d' : 'char-f'}>{char}</div>
     </div>
   );

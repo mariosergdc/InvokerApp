@@ -4,10 +4,27 @@
 
 .app {
   display: flex;
+  position: relative;
   justify-content: center;
   width: 100vw;
   height: 100vh;
   background-image: url('../../public/photos/fondo1.jpg');
+}
+
+.info {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.4);
+  margin: 0.5rem;
+  border-radius: 0.5rem;
+  font-size: 0.7rem;
+}
+
+.info a,
+p {
+  color: white;
 }
 
 .bg {

@@ -247,7 +247,7 @@ function InvokerApp() {
           <div className="challenge-spell">
             {challenge !== null && (
               <img
-                src={`/photos/spells/${spellTypes[challenge]}.png`}
+                src={`photos/spells/${spellTypes[challenge]}.png`}
                 alt="spell"
               />
             )}
