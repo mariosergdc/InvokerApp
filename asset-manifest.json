@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/InvokerApp/static/css/main.a187a86c.css",
+    "main.js": "/InvokerApp/static/js/main.248019e4.js",
+    "static/js/787.d3befce1.chunk.js": "/InvokerApp/static/js/787.d3befce1.chunk.js",
+    "static/media/fondo1.jpg": "/InvokerApp/static/media/fondo1.739aac0ba14b9b16aaf8.jpg",
+    "index.html": "/InvokerApp/index.html",
+    "main.a187a86c.css.map": "/InvokerApp/static/css/main.a187a86c.css.map",
+    "main.248019e4.js.map": "/InvokerApp/static/js/main.248019e4.js.map",
+    "787.d3befce1.chunk.js.map": "/InvokerApp/static/js/787.d3befce1.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a187a86c.css",
+    "static/js/main.248019e4.js"
+  ]
+}
