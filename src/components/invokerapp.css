@@ -87,11 +87,16 @@ button {
   outline: none;
   font-size: 1rem;
   color: #ffffff;
-  background-color: rgb(0, 128, 255);
   border-radius: 20px;
+  cursor: pointer;
 }
+
+.btn-start {
+  background-color: rgb(0, 128, 255);
+}
+
 .btn-stop {
-  background: rgb(252, 4, 4);
+  background-color: rgb(252, 4, 4);
 }
 
 .timer {
@@ -211,4 +216,63 @@ button {
   background-color: rgb(15, 15, 15);
   font-size: 8px;
   padding: 1px;
+}
+
+.help {
+  position: absolute;
+  top: 3rem;
+  right: 1rem;
+  z-index: 999;
+}
+
+.help-closed {
+  display: none;
+}
+
+.help-img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.help-grid-container {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.75);
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.column1 {
+  width: 100px;
+}
+
+.column2 {
+  width: 50px;
+}
+
+.column3 {
+  width: 44px;
+}
+
+.column4 {
+  width: 60px;
+}
+
+.help-button {
+  font-size: 0.8rem;
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem;
+  color: rgb(255, 255, 255);
+  background-color: rgba(0, 0, 0, 0.4);
+  border: none;
 }
